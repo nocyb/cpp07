@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njung <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: njung <njung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 16:13:27 by njung             #+#    #+#             */
-/*   Updated: 2026/01/15 16:48:06 by njung            ###   ########.fr       */
+/*   Updated: 2026/01/15 18:24:38 by njung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include <stdexcept>
 #include <string>
 
 template <typename T> class Array
@@ -45,6 +46,19 @@ template <typename T> class Array
 			}
 			return *this;
 		}
+    T & operator[](unsigned int index) {
+        if (index >= _size)
+            throw std::out_of_range("Index out of bounds");
+        return _array[index];
+    }
+    const T & operator[](unsigned int index) const {
+        if (index >= _size)
+            throw std::out_of_range("Index out of bounds");
+        return _array[index];
+    }
+    unsigned int size() const {
+        return _size;
+    }
     ~Array() {
         delete[] _array;
     }
